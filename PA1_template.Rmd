@@ -1,13 +1,7 @@
----
-title: "Reproducible Research: Peer Assessment 1"
-author: by Robert Merriman
-output: 
-  html_document:
-    keep_md: true
----
-
 ## Introduction
 This is my reproducible markdown script for peer assignment 1 of the Coursera course Reproducible Research.
+
+By Robert Merriman
 
 [Course reference URL](https://class.coursera.org/repdata-016/human_grading/view/courses/972599/assessments/3/submissions)
 
