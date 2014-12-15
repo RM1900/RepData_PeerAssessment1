@@ -215,19 +215,19 @@ hr {
 
 <h2>Part 1 loading and preprocessing the data</h2>
 
-<p>We loaded and pre-processed the data.  As an R project is being used, the working directory is set automatically to the directory containing the R project which is in the root of the repository containing this R Markdown file and the zipped data file.  As such we don&#39;t need to change the working directory.</p>
+<p>I loaded and pre-processed the data.  As an R project is being used, the working directory is set automatically to the directory containing the R project which is in the root of the repository containing this R Markdown file and the zipped data file.  As such I don&#39;t need to change the working directory.</p>
 
 <pre><code class="r">zipFile &lt;- &quot;./activity.zip&quot;
 unzip(zipFile, exdir = &quot;./&quot;)
 activityData &lt;- read.csv(&quot;./activity.csv&quot;)
 </code></pre>
 
-<p>And then we cast the date variable from a factor to a date</p>
+<p>And then I cast the date variable from a factor to a date</p>
 
 <pre><code class="r">activityData$date = as.Date(as.character(activityData$date), &quot;%Y-%m-%d&quot;)
 </code></pre>
 
-<p>From the data frame we can see there are three variables:</p>
+<p>From the data frame I can see there are three variables:</p>
 
 <pre><code class="r">str(activityData)
 </code></pre>
@@ -250,14 +250,14 @@ activityData &lt;- read.csv(&quot;./activity.csv&quot;)
 
 <h2>Part 2 what is mean total number of steps taken per day?</h2>
 
-<p>From the instructions we can ignore the missing values in the dataset. We are to:</p>
+<p>From the instructions I can ignore the missing values in the dataset. I am to:</p>
 
 <ol>
 <li> Make a histogram of the total number of steps taken each day.</li>
 <li> Calculate and report the mean and median total number of steps taken per day</li>
 </ol>
 
-<p>We aggregated the data summing up the steps for each day and ploted a histogram of the total number of steps taken each day:</p>
+<p>I aggregated the data summing up the steps for each day and ploted a histogram of the total number of steps taken each day:</p>
 
 <pre><code class="r">totalDaily &lt;- aggregate(steps ~ date, data = activityData, FUN = sum, na.rm=TRUE)
 hist(totalDaily$steps, main = &quot;Historgram of the total number of Steps taken each day&quot;
@@ -272,14 +272,14 @@ the median is *<em>10765.0 *</em></p>
 
 <h2>Part 3 what is the average daily activity pattern?</h2>
 
-<p>We are to:</p>
+<p>I am to:</p>
 
 <ol>
 <li> Make a time series plot (i.e. type = &ldquo;l&rdquo;) of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)</li>
 <li> And answer which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?</li>
 </ol>
 
-<p>We aggregated the data averaging the steps for each interval and plotted the data:</p>
+<p>I aggregated the data averaging the steps for each interval and plotted the data:</p>
 
 <pre><code class="r">meanInterval &lt;- aggregate(steps ~ interval, data = activityData, FUN = mean, na.rm=TRUE)
 plot(meanInterval$interval, meanInterval$steps, type = &quot;l&quot;, main = &quot;Average number of steps per interval&quot;
@@ -292,7 +292,7 @@ plot(meanInterval$interval, meanInterval$steps, type = &quot;l&quot;, main = &qu
 
 <h2>Part 4 imputing missing values</h2>
 
-<p>From the activity data there are 2304 missing values coded as NA.  As the missing values may bias some calculations or data, we are to:</p>
+<p>From the activity data there are 2304 missing values coded as NA.  As the missing values may bias some calculations or data, I am to:</p>
 
 <ol>
 <li> Calculate and report the total number of missing values in the dataset (i.e. the total number of rows with NAs)</li>
@@ -307,9 +307,9 @@ plot(meanInterval$interval, meanInterval$steps, type = &quot;l&quot;, main = &qu
 
 <p>There are 2304 missing values coded as NA.</p>
 
-<p>We chose using the rrcovNA package and used the impSeq function to impute the missing values.  Many of the other packages and functions in the above reference did not work well with this data set.  For example the VIM package irmi function generated negative values for the number of steps for a given interval.</p>
+<p>I chose using the rrcovNA package and used the impSeq function to impute the missing values.  Many of the other packages and functions in the above reference did not work well with this data set.  For example the VIM package irmi function generated negative values for the number of steps for a given interval.</p>
 
-<p>We created a new data set that contains the imputed values using our chosen method.  As impSeq returns a matrix, we will cast it to a data frame and convert values for the date field back to the correct date values instead of keeping them as an integer.</p>
+<p>I created a new data set that contains the imputed values using our chosen method.  As impSeq returns a matrix, I cast it to a data frame and converted values for the date field back to date values instead of keeping them as an integer.</p>
 
 <pre><code class="r">library(rrcovNA)
 imputedData &lt;- impSeq(activityData)
@@ -317,7 +317,7 @@ imputedData &lt;- data.frame(imputedData)
 imputedData$date = as.Date(imputedData$date, origin = &quot;1970-01-01&quot;)
 </code></pre>
 
-<p>We plotted a histogram of the total number of steps taken each day using the imputed data set by aggregating the data by summing up the steps for each day:</p>
+<p>I plotted a histogram of the total number of steps taken each day using the imputed data set by aggregating the data by summing up the steps for each day:</p>
 
 <pre><code class="r">totalImputedDaily &lt;- aggregate(steps ~ date, data = imputedData, FUN = sum, na.rm=TRUE)
 hist(totalImputedDaily$steps, main = &quot;Historgram of the total number of Steps taken each day&quot;
@@ -331,7 +331,7 @@ hist(totalImputedDaily$steps, main = &quot;Historgram of the total number of Ste
 the mean is *<em>10767.2 *</em> and 
 the median is *<em>10781.1 *</em></p>
 
-<p>We can see that the mean, median, and quantiles have changed while the min and max have not:</p>
+<p>I can see that the mean, median, and quantiles have changed while the min and max have not:</p>
 
 <pre><code class="r">summary(totalDaily)
 </code></pre>
@@ -357,25 +357,25 @@ the median is *<em>10781.1 *</em></p>
 ##  Max.   :2012-11-30   Max.   :21194
 </code></pre>
 
-<p>Depending on the purpose for which we calculated this data, how the missing values were imputed can have an effect on the outcome. If we used a method that significantly changed the quantiles, mean, or median, we might end up with different conclusions.</p>
+<p>Depending on the purpose for which I calculated this data, how the missing values were imputed can have an effect on the outcome. If I used a method that significantly changed the quantiles, mean, or median, I might end up with different conclusions.</p>
 
 <h2>Part 5 are there differences in activity patterns between weekdays and weekends?</h2>
 
-<p>Using the data set with imputed values we are to:</p>
+<p>Using the data set with imputed values I am to:</p>
 
 <ol>
 <li> Create a new factor variable in the dataset with two levels – “weekday” and “weekend” indicating whether a given date is a weekday or weekend day.</li>
 <li> Make a panel plot containing a time series plot (i.e. type = &ldquo;l&rdquo;) of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis).</li>
 </ol>
 
-<p>We added a new variable and set the value based on the date variable value and then converted it to a factor variable</p>
+<p>I added a new variable and set the value based on the date variable value and then converted it to a factor variable</p>
 
 <pre><code class="r">imputedData$WeekDay &lt;- ifelse((weekdays(imputedData$date) == &quot;Sunday&quot; | weekdays(imputedData$date) == &quot;Saturday&quot;)
                               , &quot;weekend&quot;, &quot;weekday&quot;)
 imputedData$WeekDay = factor(imputedData$WeekDay, levels = c(&quot;weekday&quot;, &quot;weekend&quot;))
 </code></pre>
 
-<p>We aggregated the data averaging the steps for each interval and plotted the data:</p>
+<p>I aggregated the data averaging the steps for each interval and plotted the data:</p>
 
 <pre><code class="r">library(lattice)
 meanWDay &lt;- aggregate(steps ~ interval+WeekDay, data = imputedData, FUN = mean, na.rm=TRUE)
